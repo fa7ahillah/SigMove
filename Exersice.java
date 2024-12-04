@@ -9,4 +9,22 @@ public class Exersice{
         this.durasi = durasi;
         this.nama = nama;
     }
+
+    public int getDurasi(){
+        return this.durasi;
+    }
+
+    public String getNama(){
+        return this.nama;
+    }
+
+    public void setDurasi(int durasi){
+        this.durasi = durasi;
+    }
+
+    public void setNama(String nama){
+        this.nama = nama;
+    }
+
+    
 }
