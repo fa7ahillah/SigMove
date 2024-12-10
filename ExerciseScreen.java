@@ -26,7 +26,8 @@ public class ExerciseScreen {
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         contentPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        ImageIcon exerciseImage = new ImageIcon("jumping_jacks.png"); // Ganti dengan path gambar Anda
+        //buat gambar
+        ImageIcon exerciseImage = new ImageIcon(""); 
         JLabel imageLabel = new JLabel(exerciseImage);
         imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
