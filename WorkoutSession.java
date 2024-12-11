@@ -2,20 +2,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutSession {
-    private List<String> exercises; 
-    private List<Integer> durations; 
+    private List<Exercise> exercises; 
     private int currentExerciseIndex; 
     private boolean isRunning; 
-
+    private int totalTime; 
     // Constructor
-    public WorkoutSession(List<String> exercises, List<Integer> durations) {
-        if (exercises.size() != durations.size()) {
-            throw new IllegalArgumentException("Jumlah latihan dan durasi harus sama.");
+    public WorkoutSession(List<Exercise> exercises) {
+        if (exercises.isEmpty()) {
+            throw new IllegalArgumentException("Daftar latihan tidak boleh kosong.");
         }
         this.exercises = new ArrayList<>(exercises);
-        this.durations = new ArrayList<>(durations);
         this.currentExerciseIndex = 0;
         this.isRunning = false;
+        this.totalTime = 0;
     }
 
     // Mulai sesi latihan
@@ -26,12 +25,13 @@ public class WorkoutSession {
         }
 
         if (currentExerciseIndex >= exercises.size()) {
-            System.out.println("Latihan selesai. Mulai ulang untuk mengulang sesi.");
+            System.out.println("Semua latihan selesai. Total waktu: " + totalTime + " detik.");
             return;
         }
 
         isRunning = true;
-        System.out.println("Mulai latihan: " + getCurrentExercise() + " selama " + getCurrentDuration() + " detik.");
+        Exercise currentExercise = exercises.get(currentExerciseIndex);
+        System.out.println("Mulai latihan: " + currentExercise.getName() + " selama " + currentExercise.getDuration() + " detik.");
     }
 
     // Hentikan sesi latihan
@@ -42,62 +42,61 @@ public class WorkoutSession {
         }
 
         isRunning = false;
-        System.out.println("Latihan dihentikan pada: " + getCurrentExercise());
+        System.out.println("Latihan dihentikan.");
     }
 
     // Lanjut ke latihan berikutnya
     public void nextExercise() {
-        if (currentExerciseIndex + 1 < exercises.size()) {
-            currentExerciseIndex++;
-            System.out.println("Latihan berikutnya: " + getCurrentExercise());
-        } else {
-            System.out.println("Semua latihan selesai!");
-            resetSession();
-        }
-    }
-
-    // Dapatkan latihan saat ini
-    public String getCurrentExercise() {
         if (currentExerciseIndex < exercises.size()) {
-            return exercises.get(currentExerciseIndex);
+            Exercise currentExercise = exercises.get(currentExerciseIndex);
+            totalTime += currentExercise.getDuration();
+            System.out.println("Selesai: " + currentExercise.getName());
+            giveFeedback();
+
+            currentExerciseIndex++;
+            if (currentExerciseIndex < exercises.size()) {
+                System.out.println("Latihan berikutnya: " + exercises.get(currentExerciseIndex).getName());
+            } else {
+                System.out.println("Semua latihan selesai! Total waktu: " + totalTime + " detik.");
+            }
+        } else {
+            System.out.println("Tidak ada latihan tersisa.");
         }
-        return null;
     }
 
-    // Dapatkan durasi latihan saat ini
-    public int getCurrentDuration() {
-        if (currentExerciseIndex < durations.size()) {
-            return durations.get(currentExerciseIndex);
-        }
-        return 0;
+    // Dapatkan status sesi
+    public void getStatus() {
+        int completed = currentExerciseIndex;
+        int total = exercises.size();
+        System.out.println("Status: " + completed + "/" + total + " latihan selesai (" + (completed * 100 / total) + "%).");
+    }
+
+    // Berikan feedback motivasi
+    private void giveFeedback() {
+        String[] feedbacks = {
+            "Bagus! Tetap semangat!",
+            "Kerja keras tidak akan mengkhianati hasil!",
+            "Hebat, teruskan!",
+            "Luar biasa! Satu langkah lebih dekat ke tujuanmu!"
+        };
+        int index = (int) (Math.random() * feedbacks.length);
+        System.out.println("Motivasi: " + feedbacks[index]);
     }
 
     // Atur durasi latihan tertentu
     public void setDurationForExercise(int exerciseIndex, int duration) {
-        if (exerciseIndex < 0 || exerciseIndex >= durations.size()) {
+        if (exerciseIndex < 0 || exerciseIndex >= exercises.size()) {
             throw new IllegalArgumentException("Indeks latihan tidak valid.");
         }
-        durations.set(exerciseIndex, duration);
-        System.out.println("Durasi untuk latihan \"" + exercises.get(exerciseIndex) + "\" diatur menjadi " + duration + " detik.");
-    }
-
-    // Atur semua durasi latihan
-    public void setAllDurations(int duration) {
-        for (int i = 0; i < durations.size(); i++) {
-            durations.set(i, duration);
-        }
-        System.out.println("Semua durasi latihan diatur menjadi " + duration + " detik.");
+        exercises.get(exerciseIndex).setDuration(duration);
+        System.out.println("Durasi untuk latihan \"" + exercises.get(exerciseIndex).getName() + "\" diatur menjadi " + duration + " detik.");
     }
 
     // Reset sesi latihan
     public void resetSession() {
         currentExerciseIndex = 0;
+        totalTime = 0;
         isRunning = false;
         System.out.println("Sesi latihan direset.");
-    }
-
-    // Periksa status sesi
-    public boolean isRunning() {
-        return isRunning;
     }
 }
