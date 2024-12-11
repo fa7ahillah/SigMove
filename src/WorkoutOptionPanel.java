@@ -20,20 +20,26 @@ public class WorkoutOptionPanel {
         JPanel workoutPanel = new JPanel(new GridLayout(2, 2, 10, 10));
         workoutPanel.setBackground(Color.DARK_GRAY);
 
-        addWorkoutOption(workoutPanel, "DADA", "11 LATIHAN");
-        addWorkoutOption(workoutPanel, "PERUT", "11 LATIHAN");
-        addWorkoutOption(workoutPanel, "LENGAN", "11 LATIHAN");
-        addWorkoutOption(workoutPanel, "KAKI", "11 LATIHAN");
+        addWorkoutOption(workoutPanel, "DADA", "11 LATIHAN", "assets\\dada.png");
+        addWorkoutOption(workoutPanel, "PERUT", "11 LATIHAN", "assets\\perut.png");
+        addWorkoutOption(workoutPanel, "LENGAN", "11 LATIHAN", "assets\\lengan.png");
+        addWorkoutOption(workoutPanel, "KAKI", "11 LATIHAN", "assets\\kaki.png");
 
         panel.add(workoutPanel, BorderLayout.CENTER);
     }
 
-    private void addWorkoutOption(JPanel panel, String name, String exercises) {
+    private void addWorkoutOption(JPanel panel, String name, String exercises, String imagePath) {
         JPanel optionPanel = new JPanel(new BorderLayout());
         optionPanel.setBackground(Color.GRAY);
 
-        JLabel imageLabel = new JLabel("Image", JLabel.CENTER);
+        JLabel imageLabel = new JLabel("", JLabel.CENTER);
         imageLabel.setForeground(Color.WHITE);
+
+        ImageIcon icon = new ImageIcon(imagePath); 
+        Image image = icon.getImage(); 
+        Image resizedImage = image.getScaledInstance(300, 300, Image.SCALE_SMOOTH); // Adjust size as needed 
+        imageLabel.setIcon(new ImageIcon(resizedImage));
+
         optionPanel.add(imageLabel, BorderLayout.CENTER);
 
         JLabel nameLabel = new JLabel(name, JLabel.CENTER);

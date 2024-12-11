@@ -9,12 +9,12 @@ public class LoginPanel {
         panel.setBackground(Color.DARK_GRAY);
         panel.setPreferredSize(new Dimension(200, 600));
 
-        JButton loginButton = new JButton("Log In");
+        CustomButton loginButton = new CustomButton("Log In");
         loginButton.setPreferredSize(new Dimension(185, 42));
         loginButton.setBackground(new Color(173, 216, 230));
         loginButton.setForeground(Color.WHITE);
 
-        JButton signupButton = new JButton("Sign Up");
+        CustomButton signupButton = new CustomButton("Sign Up");
         signupButton.setPreferredSize(new Dimension(185, 42));
         signupButton.setBackground(Color.WHITE);
         signupButton.setForeground(Color.BLACK);
