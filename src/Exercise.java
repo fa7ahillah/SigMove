@@ -1,26 +1,23 @@
-public class Exercise {
-    private int id;
-    private String name;
-    private int duration; 
-    private int jumlahTarget; 
-    private String targetArea;
-    private String description;
+import java.util.List;
 
+public abstract class Exercise {
+    private int id;
+    private String name, description, imagePath;
+    private List<String> targetArea;
     
-    public Exercise(int id, String name, int duration, int jumlahTarget, String targetArea, String description) {
+    public Exercise(int id, String name, List<String> targetArea, String description, String imagePath) {
         this.id = id;
-        this.name = name;
-        this.duration = duration;
-        this.jumlahTarget = jumlahTarget;
-        this.targetArea = targetArea;
         this.description = description;
+        this.name = name;
+        this.targetArea = targetArea;
+        this.imagePath = imagePath;
     }
 
-    public int getId() {
+    public int getID() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setID(int id) {
         this.id = id;
     }
 
@@ -32,27 +29,11 @@ public class Exercise {
         this.name = name;
     }
 
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public int getJumlahTarget() {
-        return jumlahTarget;
-    }
-
-    public void setJumlahTarget(int jumlahTarget) {
-        this.jumlahTarget = jumlahTarget;
-    }
-
-    public String getTargetArea() {
+    public List<String> getTargetArea() {
         return targetArea;
     }
 
-    public void setTargetArea(String targetArea) {
+    public void setTargetArea(List<String> targetArea) {
         this.targetArea = targetArea;
     }
 
@@ -64,15 +45,22 @@ public class Exercise {
         this.description = description;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     @Override
     public String toString() {
-        return "Exercise{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", duration=" + duration +
-                ", jumlahTarget=" + jumlahTarget +
-                ", targetArea='" + targetArea + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return "Exercise{" + 
+            "id=" + id + 
+            ", name='" + name + '\'' + 
+            ", targetArea='" + targetArea + '\'' + 
+            ", description='" + description + '\'' + 
+            ", imagePath='" + imagePath + '\'' + 
+            '}';    
     }
 }
