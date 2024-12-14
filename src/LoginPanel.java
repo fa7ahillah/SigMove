@@ -14,10 +14,18 @@ public class LoginPanel {
         loginButton.setBackground(new Color(173, 216, 230));
         loginButton.setForeground(Color.WHITE);
 
+        loginButton.addActionListener(e -> {
+            SwingUtilities.invokeLater(LoginMenu::new);
+        });
+
         CustomButton signupButton = new CustomButton("Sign Up");
         signupButton.setPreferredSize(new Dimension(185, 42));
         signupButton.setBackground(Color.WHITE);
         signupButton.setForeground(Color.BLACK);
+
+        signupButton.addActionListener(e -> {
+            SwingUtilities.invokeLater(SignUpForm::new);
+        });
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
