@@ -20,10 +20,10 @@ public class WorkoutOptionPanel {
         JPanel workoutPanel = new JPanel(new GridLayout(2, 2, 10, 10));
         workoutPanel.setBackground(Color.DARK_GRAY);
 
-        addWorkoutOption(workoutPanel, "DADA", "11 LATIHAN", "SigMove\\assets\\dada.png");
-        addWorkoutOption(workoutPanel, "PERUT", "16 LATIHAN", "SigMove\\assets\\perut.png");
-        addWorkoutOption(workoutPanel, "LENGAN", "19 LATIHAN", "SigMove\\assets\\lengan.png");
-        addWorkoutOption(workoutPanel, "KAKI", "23 LATIHAN", "SigMove\\assets\\kaki.png");
+        addWorkoutOption(workoutPanel, "DADA", "11 LATIHAN", "https://github.com/fa7ahillah/SigMove/blob/bce5db4f98f35996172ae1577cc9a80357a815ff/assets/dada.png");
+        addWorkoutOption(workoutPanel, "PERUT", "16 LATIHAN", "https://github.com/fa7ahillah/SigMove/blob/bce5db4f98f35996172ae1577cc9a80357a815ff/assets/perut.png");
+        addWorkoutOption(workoutPanel, "LENGAN", "19 LATIHAN", "https://github.com/fa7ahillah/SigMove/blob/bce5db4f98f35996172ae1577cc9a80357a815ff/assets/lengan.png");
+        addWorkoutOption(workoutPanel, "KAKI", "23 LATIHAN", "https://github.com/fa7ahillah/SigMove/blob/bce5db4f98f35996172ae1577cc9a80357a815ff/assets/kaki.png");
 
         panel.add(workoutPanel, BorderLayout.CENTER);
     }
