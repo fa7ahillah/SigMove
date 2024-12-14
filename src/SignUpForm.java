@@ -81,8 +81,10 @@ public class SignUpForm {
                     boolean isSaved = DatabaseManager.saveUserData(nama, username, usia, jenisKelamin, beratBadan, tinggiBadan, password);
                     if (isSaved) {
                         JOptionPane.showMessageDialog(frame, "Pendaftaran berhasil!");
+                        frame.dispose(); // Tutup form pendaftaran
+                        new LoginMenu(); // Buka form login
                     } else {
-                        JOptionPane.showMessageDialog(frame, "Pendaftaran gagal. TUnggu beberapa saat dan coba lagi.", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(frame, "Pendaftaran gagal. Tunggu beberapa saat dan coba lagi.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
                     JOptionPane.showMessageDialog(frame, "Password dan konfirmasi password tidak cocok!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -94,6 +96,21 @@ public class SignUpForm {
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.CENTER;
         contentPanel.add(signUpButton, gbc);
+
+        // Tambahkan label "Sudah daftar? Silahkan login"
+        JLabel loginLabel = new JLabel("<HTML><U>Sudah daftar? Silahkan login</U></HTML>");
+        loginLabel.setForeground(Color.ORANGE);
+        loginLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); // Ubah kursor menjadi tangan
+        loginLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                frame.dispose(); // Tutup form sign up
+                new LoginMenu(); // Buka form login
+            }
+        });
+
+        gbc.gridy = row++;
+        gbc.anchor = GridBagConstraints.CENTER;
+        contentPanel.add(loginLabel, gbc);
 
         frame.add(contentPanel, BorderLayout.CENTER);
         frame.setVisible(true);
