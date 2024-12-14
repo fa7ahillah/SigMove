@@ -34,6 +34,7 @@ public class DatabaseManager {
         }
     }
 
+    //yg ini keknya ga kepake
     public static boolean showLatihan(String nama_latihan, String kategori, String jenis, int level, String gambar) {
         String sql = "SELECT nama_latihan, level, gambar FROM latihan WHERE kategori = ? AND nama_latihan = ? AND level = ?";
         boolean result = false;

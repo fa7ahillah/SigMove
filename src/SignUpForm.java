@@ -1,18 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class SignUpForm {
     public SignUpForm() {
-        // Frame utama
         JFrame frame = new JFrame("SignMove");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 600);
         frame.getContentPane().setBackground(Color.BLACK);
         frame.setLayout(new BorderLayout());
 
-        // Panel atas (judul)
         JPanel headerPanel = new JPanel();
         headerPanel.setBackground(Color.BLACK);
         JLabel titleLabel = new JLabel("SignMove");
@@ -21,7 +18,6 @@ public class SignUpForm {
         headerPanel.add(titleLabel);
         frame.add(headerPanel, BorderLayout.NORTH);
 
-        // Panel tengah menggunakan GridBagLayout
         JPanel contentPanel = new JPanel(new GridBagLayout());
         contentPanel.setBackground(Color.BLACK);
         contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Padding luar
@@ -29,7 +25,6 @@ public class SignUpForm {
         gbc.insets = new Insets(10, 10, 10, 10); // Spasi antar elemen
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Menambahkan komponen ke panel tengah
         int row = 0;
         JTextField namaField = new JTextField(15);
         JTextField usernameField = new JTextField(15);
@@ -43,7 +38,6 @@ public class SignUpForm {
         contentPanel.add(createLabeledField("Username:", usernameField), createGbc(row++));
         contentPanel.add(createLabeledField("Usia:", usiaField), createGbc(row++));
 
-        // Jenis kelamin
         JPanel genderPanel = new JPanel(new BorderLayout());
         genderPanel.setBackground(Color.BLACK);
         JLabel genderLabel = new JLabel("Jenis Kelamin:");
@@ -59,10 +53,10 @@ public class SignUpForm {
         contentPanel.add(createLabeledField("Password:", passwordField), createGbc(row++));
         contentPanel.add(createLabeledField("Konfirmasi Password:", confirmPasswordField), createGbc(row++));
 
-        // Tombol Sign Up
         JButton signUpButton = new JButton("Sign Up");
         signUpButton.setBackground(Color.ORANGE);
         signUpButton.setForeground(Color.BLACK);
+        signUpButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); 
         signUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -75,14 +69,12 @@ public class SignUpForm {
                 String password = new String(passwordField.getPassword());
                 String confirmPassword = new String(confirmPasswordField.getPassword());
 
-                // Validasi input
                 if (password.equals(confirmPassword)) {
-                    // Panggil method dari DatabaseManager untuk menyimpan data
                     boolean isSaved = DatabaseManager.saveUserData(nama, username, usia, jenisKelamin, beratBadan, tinggiBadan, password);
                     if (isSaved) {
                         JOptionPane.showMessageDialog(frame, "Pendaftaran berhasil!");
-                        frame.dispose(); // Tutup form pendaftaran
-                        new LoginMenu(); // Buka form login
+                        frame.dispose(); 
+                        new LoginMenu(); 
                     } else {
                         JOptionPane.showMessageDialog(frame, "Pendaftaran gagal. Tunggu beberapa saat dan coba lagi.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
@@ -97,14 +89,13 @@ public class SignUpForm {
         gbc.anchor = GridBagConstraints.CENTER;
         contentPanel.add(signUpButton, gbc);
 
-        // Tambahkan label "Sudah daftar? Silahkan login"
         JLabel loginLabel = new JLabel("<HTML><U>Sudah daftar? Silahkan login</U></HTML>");
         loginLabel.setForeground(Color.ORANGE);
-        loginLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); // Ubah kursor menjadi tangan
+        loginLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); 
         loginLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                frame.dispose(); // Tutup form sign up
-                new LoginMenu(); // Buka form login
+                frame.dispose(); 
+                new LoginMenu(); 
             }
         });
 
@@ -116,32 +107,31 @@ public class SignUpForm {
         frame.setVisible(true);
     }
 
-    // Fungsi untuk membuat GridBagConstraints dengan row dinamis
     private GridBagConstraints createGbc(int row) {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridy = row;
         gbc.gridx = 0;
         gbc.gridwidth = 2;
-        gbc.insets = new Insets(10, 10, 10, 10); // Padding antar elemen
+        gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         return gbc;
     }
 
-    // Fungsi untuk membuat label dan field dalam satu panel
     private JPanel createLabeledField(String labelText, JComponent field) {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Color.BLACK);
 
         JLabel label = new JLabel(labelText);
         label.setForeground(Color.WHITE);
-        label.setPreferredSize(new Dimension(150, 25)); // Panjang label tetap
-        field.setPreferredSize(new Dimension(180, 25)); // Panjang input tetap
+        label.setPreferredSize(new Dimension(150, 25));
+        field.setPreferredSize(new Dimension(180, 25));
 
         panel.add(label, BorderLayout.WEST);
         panel.add(field, BorderLayout.CENTER);
         return panel;
     }
 
+    //tester
     public static void main(String[] args) {
         SwingUtilities.invokeLater(SignUpForm::new);
     }
