@@ -20,10 +20,10 @@ public class WorkoutOptionPanel {
         JPanel workoutPanel = new JPanel(new GridLayout(2, 2, 10, 10));
         workoutPanel.setBackground(Color.DARK_GRAY);
 
-        addWorkoutOption(workoutPanel, "DADA", "11 LATIHAN", "assets\\dada.png");
-        addWorkoutOption(workoutPanel, "PERUT", "11 LATIHAN", "assets\\perut.png");
-        addWorkoutOption(workoutPanel, "LENGAN", "11 LATIHAN", "assets\\lengan.png");
-        addWorkoutOption(workoutPanel, "KAKI", "11 LATIHAN", "assets\\kaki.png");
+        addWorkoutOption(workoutPanel, "DADA", "11 LATIHAN", "SigMove\\assets\\dada.png");
+        addWorkoutOption(workoutPanel, "PERUT", "16 LATIHAN", "SigMove\\assets\\perut.png");
+        addWorkoutOption(workoutPanel, "LENGAN", "19 LATIHAN", "SigMove\\assets\\lengan.png");
+        addWorkoutOption(workoutPanel, "KAKI", "23 LATIHAN", "SigMove\\assets\\kaki.png");
 
         panel.add(workoutPanel, BorderLayout.CENTER);
     }
@@ -37,7 +37,7 @@ public class WorkoutOptionPanel {
 
         ImageIcon icon = new ImageIcon(imagePath); 
         Image image = icon.getImage(); 
-        Image resizedImage = image.getScaledInstance(300, 300, Image.SCALE_SMOOTH); // Adjust size as needed 
+        Image resizedImage = image.getScaledInstance(300, 300, Image.SCALE_SMOOTH); 
         imageLabel.setIcon(new ImageIcon(resizedImage));
 
         optionPanel.add(imageLabel, BorderLayout.CENTER);

@@ -5,8 +5,8 @@ public class StartWorkout {
     private int currentExerciseIndex;
     private boolean isWorkoutActive;
     private int totalCalories;
-    private long startTime; // Waktu mulai latihan
-    private long endTime; // Waktu selesai latihan
+    private long startTime; 
+    private long endTime; 
     private WorkoutGUI workoutGUI;
 
     public StartWorkout(List<Exercise> exercises, WorkoutGUI workoutGUI) {
@@ -23,7 +23,7 @@ public class StartWorkout {
         if (!exercises.isEmpty()) {
             isWorkoutActive = true;
             currentExerciseIndex = 0;
-            startTime = System.currentTimeMillis(); // Catat waktu mulai
+            startTime = System.currentTimeMillis(); 
             startExercise(exercises.get(currentExerciseIndex));
         } else {
             System.out.println("No exercises available to start the workout.");
@@ -50,7 +50,7 @@ public class StartWorkout {
 
     public void endWorkout() {
         isWorkoutActive = false;
-        endTime = System.currentTimeMillis(); // Catat waktu selesai
+        endTime = System.currentTimeMillis(); 
         System.out.println("Workout completed. Great job!");
         if (workoutGUI != null) {
             workoutGUI.showWorkoutResult(getWorkoutResult());
@@ -58,7 +58,7 @@ public class StartWorkout {
     }
 
     public WorkoutResult getWorkoutResult() {
-        long totalTime = (endTime - startTime) / 1000; // Total waktu dalam detik
+        long totalTime = (endTime - startTime) / 1000; 
         return new WorkoutResult(exercises.size(), totalCalories, (int) totalTime);
     }
 

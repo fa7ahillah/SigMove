@@ -3,69 +3,100 @@ import java.awt.*;
 import java.util.List;
 
 public class WorkoutDetailPanel {
-    private JPanel panel;
+    private JPanel mainPanel;
+    private JPanel listPanel;
+    private JPanel buttonPanel;
 
     public WorkoutDetailPanel(String workoutName, List<Exercise> exercises, WorkoutGUI workoutGUI) {
-        panel = new JPanel();
-        panel.setBackground(Color.DARK_GRAY);
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        mainPanel = new JPanel();
+        mainPanel.setBackground(Color.DARK_GRAY);
+        mainPanel.setLayout(new BorderLayout());
 
-        JLabel workoutLabel = new JLabel(workoutName, JLabel.CENTER);
+        listPanel = new JPanel();
+        listPanel.setBackground(Color.DARK_GRAY);
+        listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
+
+        JLabel workoutLabel = new JLabel("Detail Latihan: " + workoutName, JLabel.CENTER);
         workoutLabel.setFont(new Font("Arial", Font.BOLD, 18));
         workoutLabel.setForeground(Color.WHITE);
-        panel.add(workoutLabel);
+        listPanel.add(workoutLabel);
 
         for (Exercise exercise : exercises) {
-            JPanel exercisePanel = new JPanel();
-            exercisePanel.setBackground(Color.GRAY);
-            exercisePanel.setLayout(new BoxLayout(exercisePanel, BoxLayout.Y_AXIS));
-            exercisePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            System.out.println("Menambahkan latihan: " + exercise.getName() + " - ID: " + exercise.getID());
 
-            Dimension panelSize = new Dimension(300, 150); 
-            exercisePanel.setPreferredSize(panelSize);
-            exercisePanel.setMaximumSize(panelSize);
-            exercisePanel.setMinimumSize(panelSize);
+            JButton exerciseButton = new JButton(exercise.getName());
+            exerciseButton.setFont(new Font("Arial", Font.BOLD, 16));
+            exerciseButton.setBackground(Color.GRAY);
+            exerciseButton.setForeground(Color.BLACK);
+            exerciseButton.setPreferredSize(new Dimension(300, 50));
+            exerciseButton.setMaximumSize(new Dimension(300, 50));
+            exerciseButton.setMinimumSize(new Dimension(300, 50));
+            exerciseButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-            JLabel nameLabel = new JLabel("Nama: " + exercise.getName());
-            nameLabel.setFont(new Font("Arial", Font.BOLD, 16));
-            nameLabel.setForeground(Color.BLACK);
-            exercisePanel.add(nameLabel);
+            exerciseButton.addActionListener(e -> showDescription(exercise));
 
-            JLabel targetAreaLabel = new JLabel("Target Area: " + exercise.getTargetArea());
-            targetAreaLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-            targetAreaLabel.setForeground(Color.BLACK);
-            exercisePanel.add(targetAreaLabel);
-
-            JLabel durationLabel = new JLabel("Duration: " + (exercise.getDuration() > 0 ? exercise.getDuration() + " detik" : "-"));
-            durationLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-            durationLabel.setForeground(Color.BLACK);
-            exercisePanel.add(durationLabel);
-
-            JLabel jumlahTargetLabel = new JLabel("Jumlah Target: " + (exercise.getJumlahTarget() > 0 ? exercise.getJumlahTarget() + " kali" : "-"));
-            jumlahTargetLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-            jumlahTargetLabel.setForeground(Color.BLACK);
-            exercisePanel.add(jumlahTargetLabel);
-
-            JLabel descriptionLabel = new JLabel("Deskripsi: " + exercise.getDescription());
-            descriptionLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-            descriptionLabel.setForeground(Color.BLACK);
-            exercisePanel.add(descriptionLabel);
-
-            panel.add(Box.createVerticalGlue());
-            panel.add(Box.createHorizontalGlue());
-            panel.add(exercisePanel);
-            panel.add(Box.createHorizontalGlue());
-            panel.add(Box.createVerticalGlue());
+            listPanel.add(Box.createVerticalStrut(10));
+            listPanel.add(exerciseButton);
         }
+
+        JScrollPane scrollPane = new JScrollPane(listPanel);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+
+        buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.DARK_GRAY);
+        buttonPanel.setLayout(new FlowLayout());
 
         JButton mulaiButton = new JButton("Mulai");
         mulaiButton.setPreferredSize(new Dimension(100, 30));
         mulaiButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         mulaiButton.addActionListener(e -> workoutGUI.showStartPage(exercises));
-        panel.add(mulaiButton);
+        buttonPanel.add(mulaiButton);
+
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
+        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+    }
+
+    private void showDescription(Exercise exercise) {
+        JDialog descriptionDialog = new JDialog((Frame) null, "Deskripsi Latihan", true);
+        descriptionDialog.setSize(400, 300);
+        descriptionDialog.setLocationRelativeTo(null);
+        descriptionDialog.setLayout(new BorderLayout());
+
+        JPanel descriptionPanel = new JPanel();
+        descriptionPanel.setBackground(Color.LIGHT_GRAY);
+        descriptionPanel.setLayout(new BoxLayout(descriptionPanel, BoxLayout.Y_AXIS));
+        descriptionPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        JLabel nameLabel = new JLabel("Nama: " + exercise.getName());
+        nameLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        nameLabel.setForeground(Color.BLACK);
+        descriptionPanel.add(nameLabel);
+
+        JLabel targetAreaLabel = new JLabel("Target Area: " + String.join(", ", exercise.getTargetArea()));
+        targetAreaLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+        targetAreaLabel.setForeground(Color.BLACK);
+        descriptionPanel.add(targetAreaLabel);
+
+        JLabel descriptionLabel = new JLabel("Deskripsi: " + exercise.getDescription());
+        descriptionLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+        descriptionLabel.setForeground(Color.BLACK);
+        descriptionPanel.add(descriptionLabel);
+
+        descriptionDialog.add(descriptionPanel, BorderLayout.CENTER);
+
+        JButton okButton = new JButton("OK");
+        okButton.addActionListener(e -> descriptionDialog.dispose());
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.LIGHT_GRAY);
+        buttonPanel.add(okButton);
+        descriptionDialog.add(buttonPanel, BorderLayout.SOUTH);
+
+        descriptionDialog.setVisible(true);
     }
 
     public JPanel getPanel() {
-        return panel;
+        return mainPanel;
     }
 }
