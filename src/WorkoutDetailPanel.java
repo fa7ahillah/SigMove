@@ -113,14 +113,14 @@ public class WorkoutDetailPanel {
         JPanel popupPanel = new JPanel();
         popupPanel.setLayout(new BoxLayout(popupPanel, BoxLayout.Y_AXIS));
         popupPanel.setBackground(new Color(50, 50, 50));
-        popupPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Tambahkan padding
+        popupPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
 
         JLabel imageLabel = new JLabel("", JLabel.CENTER);
         ImageIcon icon = new ImageIcon(exercise.getImagePath());
         Image image = icon.getImage();
-        Image resizedImage = image.getScaledInstance(150, 150, Image.SCALE_SMOOTH); // Ukuran gambar yang lebih besar
+        Image resizedImage = image.getScaledInstance(150, 150, Image.SCALE_SMOOTH); 
         imageLabel.setIcon(new ImageIcon(resizedImage));
-        imageLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Tambahkan padding
+        imageLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
         popupPanel.add(imageLabel);
 
         JLabel nameLabel = new JLabel(exercise.getName());
