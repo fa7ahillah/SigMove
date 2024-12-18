@@ -26,7 +26,7 @@ public class StartWorkout {
             startTime = System.currentTimeMillis(); 
             startExercise(exercises.get(currentExerciseIndex));
         } else {
-            System.out.println("No exercises available to start the workout.");
+            System.out.println("Tidak ada latihan selanjutnya.");
         }
     }
 
@@ -51,7 +51,7 @@ public class StartWorkout {
     public void endWorkout() {
         isWorkoutActive = false;
         endTime = System.currentTimeMillis(); 
-        System.out.println("Workout completed. Great job!");
+        System.out.println("Latihan selesai.");
         if (workoutGUI != null) {
             workoutGUI.showWorkoutResult(getWorkoutResult());
         }
@@ -63,7 +63,7 @@ public class StartWorkout {
     }
 
     private void startExercise(Exercise exercise) {
-        System.out.println("Starting exercise: " + exercise.getName());
+        System.out.println("Memulai latihan: " + exercise.getName());
     }
 
     public boolean isWorkoutActive() {

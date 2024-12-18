@@ -1,5 +1,5 @@
 public class RestSession extends Exercise {
-    private int duration; 
+    private int duration; // Durasi istirahat dalam detik
 
     public RestSession(int id, int duration) {
         super(id, "Istirahat", null, "Istirahat selama " + duration + " detik", null);

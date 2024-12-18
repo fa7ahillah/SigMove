@@ -7,6 +7,7 @@ public class StartWorkoutPanel {
     private JLabel workoutNameLabel;
     private JLabel workoutImageLabel;
     private JLabel timerLabel;
+    private JLabel targetLabel; 
     private JButton nextButton;
     private WorkoutGUI workoutGUI;
     private StartWorkout startWorkout;
@@ -33,10 +34,20 @@ public class StartWorkoutPanel {
         workoutImageLabel = new JLabel("", JLabel.CENTER);
         topPanel.add(workoutImageLabel, BorderLayout.CENTER);
 
+        JPanel labelsPanel = new JPanel(new GridLayout(2, 1)); 
+        labelsPanel.setBackground(Color.GRAY);
+
         timerLabel = new JLabel("", JLabel.CENTER);
         timerLabel.setFont(new Font("Arial", Font.BOLD, 30));
         timerLabel.setForeground(Color.RED);
-        topPanel.add(timerLabel, BorderLayout.SOUTH);
+        labelsPanel.add(timerLabel);
+
+        targetLabel = new JLabel("", JLabel.CENTER);
+        targetLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        targetLabel.setForeground(Color.YELLOW); 
+        labelsPanel.add(targetLabel);
+
+        topPanel.add(labelsPanel, BorderLayout.SOUTH);
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setBackground(Color.GRAY);
@@ -77,10 +88,17 @@ public class StartWorkoutPanel {
             if (currentExercise instanceof TimeBasedExercise) {
                 TimeBasedExercise timeBasedExercise = (TimeBasedExercise) currentExercise;
                 startCountdown(timeBasedExercise.getDuration(), false);
+                targetLabel.setText(""); 
+            } else if (currentExercise instanceof TargetBasedExercise) {
+                TargetBasedExercise targetBasedExercise = (TargetBasedExercise) currentExercise;
+                targetLabel.setText("Target: " + targetBasedExercise.getJumlahTarget()); 
+                timerLabel.setText(""); 
             } else if (isRestSession) {
-                startCountdown(10, true);
+                startCountdown(30, true); 
+                targetLabel.setText(""); 
             } else {
                 timerLabel.setText("");
+                targetLabel.setText("");
             }
         } else {
             showWorkoutResults();
