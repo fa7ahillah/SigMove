@@ -12,14 +12,14 @@ public class WorkoutDetailPanel {
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBackground(new Color(30, 30, 30)); 
 
-        // Judul panel
+        
         JLabel workoutLabel = new JLabel("Detail Latihan: " + workoutName, JLabel.CENTER);
         workoutLabel.setFont(new Font("Arial", Font.BOLD, 24)); 
         workoutLabel.setForeground(Color.WHITE);
         workoutLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0)); 
         mainPanel.add(workoutLabel, BorderLayout.NORTH);
 
-        // Panel untuk daftar latihan
+        
         listPanel = new JPanel();
         listPanel.setBackground(new Color(30, 30, 30));
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
@@ -31,7 +31,7 @@ public class WorkoutDetailPanel {
             listPanel.add(exercisePanel);
         }
 
-        // Scroll Pane untuk daftar latihan
+        
         JScrollPane scrollPane = new JScrollPane(listPanel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -39,7 +39,7 @@ public class WorkoutDetailPanel {
 
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
-        // Panel untuk tombol "Mulai"
+        
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(new Color(30, 30, 30));
 
