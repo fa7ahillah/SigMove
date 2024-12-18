@@ -10,50 +10,53 @@ public class WorkoutOptionPanel {
     public WorkoutOptionPanel(WorkoutGUI workoutGUI) {
         this.workoutGUI = workoutGUI;
         panel = new JPanel(new BorderLayout());
-        panel.setBackground(Color.DARK_GRAY);
+        panel.setBackground(new Color(30, 30, 30)); 
 
-        JLabel titleLabel = new JLabel("Apa yang ingin Anda latih?", JLabel.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        JLabel titleLabel = new JLabel("Pilih Program Latihan Anda", JLabel.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24)); 
         titleLabel.setForeground(Color.WHITE);
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0)); 
         panel.add(titleLabel, BorderLayout.NORTH);
 
-        JPanel workoutPanel = new JPanel(new GridLayout(2, 2, 10, 10));
-        workoutPanel.setBackground(Color.DARK_GRAY);
+        JPanel workoutPanel = new JPanel(new GridLayout(2, 2, 15, 15)); 
+        workoutPanel.setBackground(new Color(30, 30, 30));
 
-        addWorkoutOption(workoutPanel, "DADA", "11 LATIHAN", "https://github.com/fa7ahillah/SigMove/blob/bce5db4f98f35996172ae1577cc9a80357a815ff/assets/dada.png");
-        addWorkoutOption(workoutPanel, "PERUT", "16 LATIHAN", "https://github.com/fa7ahillah/SigMove/blob/bce5db4f98f35996172ae1577cc9a80357a815ff/assets/perut.png");
-        addWorkoutOption(workoutPanel, "LENGAN", "19 LATIHAN", "https://github.com/fa7ahillah/SigMove/blob/bce5db4f98f35996172ae1577cc9a80357a815ff/assets/lengan.png");
-        addWorkoutOption(workoutPanel, "KAKI", "23 LATIHAN", "https://github.com/fa7ahillah/SigMove/blob/bce5db4f98f35996172ae1577cc9a80357a815ff/assets/kaki.png");
+        addWorkoutOption(workoutPanel, "DADA", "9 LATIHAN", "assets\\dada.png");
+        addWorkoutOption(workoutPanel, "PERUT", "15 LATIHAN", "assets\\perut.png");
+        addWorkoutOption(workoutPanel, "LENGAN", "19 LATIHAN", "assets\\lengan.png");
+        addWorkoutOption(workoutPanel, "KAKI", "15 LATIHAN", "assets\\kaki.png");
 
         panel.add(workoutPanel, BorderLayout.CENTER);
     }
 
     private void addWorkoutOption(JPanel panel, String name, String exercises, String imagePath) {
         JPanel optionPanel = new JPanel(new BorderLayout());
-        optionPanel.setBackground(Color.GRAY);
+        optionPanel.setBackground(new Color(50, 50, 50)); 
+        optionPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
 
         JLabel imageLabel = new JLabel("", JLabel.CENTER);
-        imageLabel.setForeground(Color.WHITE);
-
         ImageIcon icon = new ImageIcon(imagePath); 
-        Image image = icon.getImage(); 
-        Image resizedImage = image.getScaledInstance(300, 300, Image.SCALE_SMOOTH); 
+        Image image = icon.getImage();
+        Image resizedImage = image.getScaledInstance(150, 150, Image.SCALE_SMOOTH); 
         imageLabel.setIcon(new ImageIcon(resizedImage));
+        imageLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
 
         optionPanel.add(imageLabel, BorderLayout.CENTER);
 
         JLabel nameLabel = new JLabel(name, JLabel.CENTER);
-        nameLabel.setFont(new Font("Arial", Font.BOLD, 14));
-        nameLabel.setForeground(Color.BLACK);
-        nameLabel.setBackground(Color.ORANGE);
+        nameLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        nameLabel.setForeground(Color.WHITE);
+        nameLabel.setBackground(new Color(70, 70, 70));
         nameLabel.setOpaque(true);
+        nameLabel.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0)); 
         optionPanel.add(nameLabel, BorderLayout.NORTH);
 
         JLabel exercisesLabel = new JLabel(exercises, JLabel.CENTER);
-        exercisesLabel.setFont(new Font("Arial", Font.PLAIN, 12));
-        exercisesLabel.setForeground(Color.BLACK);
-        exercisesLabel.setBackground(Color.ORANGE);
+        exercisesLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+        exercisesLabel.setForeground(Color.LIGHT_GRAY);
+        exercisesLabel.setBackground(new Color(70, 70, 70));
         exercisesLabel.setOpaque(true);
+        exercisesLabel.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0)); 
         optionPanel.add(exercisesLabel, BorderLayout.SOUTH);
 
         optionPanel.addMouseListener(new MouseAdapter() {
